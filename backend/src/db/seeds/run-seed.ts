@@ -1,4 +1,4 @@
-import { seed } from "./seed.js"
+const seed = require("./seed")
 
 const runSeed = () => {
     return seed()
