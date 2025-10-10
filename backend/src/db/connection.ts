@@ -1,11 +1,8 @@
-import { Pool } from "pg";
-import type { PoolConfig } from "pg";
-import dotenv from "dotenv";
-import path from "path";
-import { fileURLToPath } from "url";
+import { PoolConfig } from "pg";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const dotenv = require("dotenv");
+const path = require("path");
+const {Pool} = require("pg");
 
 const ENV = process.env.NODE_ENV || "development";
 
@@ -26,4 +23,4 @@ if (!process.env.PGDATABASE && !process.env.DATABASE_URL) {
 
 const db = new Pool(config);
 
-export default db;
+module.exports = db;

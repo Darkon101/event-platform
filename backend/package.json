@@ -4,13 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "setup-dbs": "psql -f ./src/db/setup-dbs.sql",
     "test": "jest",
-    "prepare": "husky"
+    "prepare": "husky",
+    "start": "ts-node src/listen.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "module",
+  "type": "commonjs",
   "dependencies": {
     "@scaleleap/pg-format": "^1.0.0",
     "@supabase/supabase-js": "^2.74.0",
@@ -30,7 +32,7 @@
     "@types/express": "^5.0.3",
     "@types/jest": "^30.0.0",
     "@types/jsonwebtoken": "^9.0.10",
-    "@types/node": "^24.7.0",
+    "@types/node": "^24.7.1",
     "@types/supertest": "^6.0.3",
     "husky": "^9.1.7",
     "jest": "^30.2.0",
