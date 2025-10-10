@@ -2,7 +2,7 @@ const db = require("../connection");
 const {format} = require("@scaleleap/pg-format");
 const {hashPassword} = require("../utils/hash")
 
-import type {User} from "../types"
+import type {User} from "../../types"
 
 const seed = async ({userData} : {userData: User[]}) => {
   try {
