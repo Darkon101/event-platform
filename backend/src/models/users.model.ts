@@ -1,5 +1,5 @@
 const db = require('../db/connection')
-import { hashPassword } from '../db/utils/hash';
+import { hashPassword } from '../utils/hash';
 import type { User } from '../types';
 
 export const fetchUsers = async () => {
@@ -20,17 +20,56 @@ export const fetchUserByUsername = async (username: string) => {
   return result.rows[0];
 };
 
-export const insertUser = async (userData: User) => {
-  const { username, name, email, password, isAdmin } = userData;
-  
-  const hashedPassword = await hashPassword(password);
-  
+export const updateUser = async (
+  username: string, 
+  updates: { name?: string; email?: string }
+) => {
+  const fields: string[] = [];
+  const values: any[] = [];
+  let paramIndex = 1;
+
+  if (updates.name) {
+    fields.push(`name = $${paramIndex}`);
+    values.push(updates.name);
+    paramIndex++;
+  }
+
+  if (updates.email) {
+    fields.push(`email = $${paramIndex}`);
+    values.push(updates.email);
+    paramIndex++;
+  }
+
+  if (fields.length === 0) {
+    return Promise.reject({ status: 400, msg: 'No valid fields to update' });
+  }
+
+  values.push(username);
+
   const result = await db.query(
-    `INSERT INTO users (username, name, email, password, "isAdmin") 
-     VALUES ($1, $2, $3, $4, $5) 
+    `UPDATE users 
+     SET ${fields.join(', ')} 
+     WHERE username = $${paramIndex} 
      RETURNING username, name, email, "isAdmin", created_at`,
-    [username, name, email, hashedPassword, isAdmin]
+    values
   );
-  
+
+  if (result.rows.length === 0) {
+    return Promise.reject({ status: 404, msg: 'User not found' });
+  }
+
+  return result.rows[0];
+};
+
+export const deleteUser = async (username: string) => {
+  const result = await db.query(
+    'DELETE FROM users WHERE username = $1 RETURNING username',
+    [username]
+  );
+
+  if (result.rows.length === 0) {
+    return Promise.reject({ status: 404, msg: 'User not found' });
+  }
+
   return result.rows[0];
 };

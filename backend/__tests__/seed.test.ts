@@ -10,6 +10,7 @@ describe("User Seed", () => {
   afterAll(async () => await db.end());
   it("should insert the correct number of users", async () => {
     const { rows } = await db.query(`SELECT * FROM users;`);
+    console.log(userData)
     console.log(rows)
     expect(rows.length).toBe(userData.length);
   });

@@ -1,7 +1,13 @@
 const seed = require("./seed")
+const devData = require('../data/development-data/index');
+const db = require('../connection')
 
-const runSeed = () => {
-    return seed()
+const runSeed = async () => {
+    await seed(devData);
+    await db.end();
 }
 
-runSeed()
+runSeed().catch(err => {
+    console.error("Seed failed:", err);
+    process.exit(1);
+});

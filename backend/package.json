@@ -5,9 +5,12 @@
   "main": "index.js",
   "scripts": {
     "setup-dbs": "psql -f ./src/db/setup-dbs.sql",
+    "seed-dev": "ts-node src/db/seeds/run-seed.ts",
     "test": "jest",
     "prepare": "husky",
-    "start": "ts-node src/listen.ts"
+    "start": "ts-node src/listen.ts",
+    "query": "ts-node src/db/query.ts",
+    "fetch-events": "ts-node src/scripts/fetch-yelp-events.ts"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +20,7 @@
     "@scaleleap/pg-format": "^1.0.0",
     "@supabase/supabase-js": "^2.74.0",
     "@types/pg": "^8.15.5",
+    "axios": "^1.12.2",
     "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",

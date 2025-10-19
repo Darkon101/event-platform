@@ -1,10 +1,12 @@
 import express from 'express'
-const {getUsers, getUserByUsername, postUser} = require('../controllers/users.controller')
+import { authenticate, requireAdmin } from '../middleware/auth';
+const {getUsers, getUserByUsername, patchUser, removeUser} = require('../controllers/users.controller')
 
 const usersRouter = express.Router()
 
-usersRouter.get('/', getUsers);
-usersRouter.get('/:username', getUserByUsername);
-usersRouter.post('/', postUser);
+usersRouter.get("/users", authenticate, requireAdmin, getUsers);
+usersRouter.get("/users/:username", getUserByUsername);
+usersRouter.patch("/users/:username", authenticate, patchUser);
+usersRouter.delete("/users/:username", authenticate, removeUser);
 
 module.exports = usersRouter

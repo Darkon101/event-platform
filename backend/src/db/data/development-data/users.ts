@@ -1,6 +1,4 @@
-import { User } from "../../../types";
-
-export const userData: User[] = [
+module.exports = [
     {
         username: "testuser",
         name: "Test User",
