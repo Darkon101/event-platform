@@ -7,7 +7,7 @@
     "setup-dbs": "psql -f ./src/db/setup-dbs.sql",
     "seed-dev": "ts-node src/db/seeds/run-seed.ts",
     "test": "jest",
-    "prepare": "husky",
+    "prepare": "husky install || true",
     "start": "node dist/listen.js",
     "query": "ts-node src/db/query.ts",
     "fetch-events": "ts-node src/scripts/fetch-yelp-events.ts",
