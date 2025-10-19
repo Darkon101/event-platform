@@ -10,7 +10,8 @@
     "prepare": "husky",
     "start": "ts-node src/listen.ts",
     "query": "ts-node src/db/query.ts",
-    "fetch-events": "ts-node src/scripts/fetch-yelp-events.ts"
+    "fetch-events": "ts-node src/scripts/fetch-yelp-events.ts",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
