@@ -53,7 +53,7 @@ module.exports = [
     location: "London, XGL",
     date: new Date("2009-07-03T14:00:00.000Z"),
     capacity: 50,
-    price: 13,
+    price: 39,
     created_by: "testadmin",
     external_id: "yelp_london-blur-in-hyde-park",
     image_url: "https://s3-media0.fl.yelpcdn.com/ephoto/dIVBrZY--TPVWFzJna-FXQ/o.jpg",
